@@ -1,0 +1,31 @@
+
+header{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+header h3{
+    width:50%;
+
+}
+
+header p{
+    width:50%;
+    display: flex;
+    /* need to put flex at parent level */
+    justify-content: end;
+}
+/* need to specify parent and children key selector */
+
+.hide{
+    display: none;
+}
+
+#intro-section, #question-section, #initial-section, #highscore-section{
+    text-align: center;
+}
+
+#question-section ul{
+    list-style: none;
+}
+
