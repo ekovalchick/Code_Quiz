@@ -2,36 +2,42 @@ var startBtn= document.getElementById("start-btn");
 var introSectionEl= document.getElementById("intro-section");
 var timerEl= document.getElementById("timer");
 var questionSectionEl= document.getElementById("question-section");
-var choicesEl= document.querySelectorAll("choices")
+var choicesEl= document.querySelectorAll(".choices")
 var titleEl=document.getElementById('title');
-var questionIndex=0;
+var questionIndex= 0;
+var initialSectionEl = document.getElementById("initial-section");
+var finalScoreEl  = document.getElementById("highscore-section");
+var goBackBtn = document.getElementById("go-back-bt");
+var enteredValueEl = document.getElementById("initial-input");
+var showEndListEl = document.getElementById("entered-value")
+
 
 var questionsArray=[
     {
         title:"Commonly used data types DO NOT include:",
-        choices:["1. Strings","2. Booleans","3. Alerts", "4. Numbers" ],
-        answer: "2. Booleans"
+        choices:["1.Strings","2.Booleans","3.Alerts", "4.Numbers" ],
+        answer: "1",
     },
     {
-        title:"CHANGE FOR QUESTION 2",
-        choices:[ ],
-        answer: ""
+        title:"The Condition in an if / else statement is enclosed with ____.",
+        choices:[ "1.Quotes","2.Curley Brackets","3.Parenthesis","4.Square Brackets"],
+        answer: 2,
     },
     {
         
-        title:"CHANGE FOR Q3",
-        choices:[ ],
-        answer: ""
+        title:"Arrays in JavaScript can be used to store ______.",
+        choices:["1.Numbers and Strings", "2.Other Arrays", "3.Booleans", "4.All of the Above" ],
+        answer: 3,
     },
     {
-        title:"CHANGE FOR Q4",
-        choices:[ ],
-        answer: ""
+        title:"String values must be enclosed within _____ when being assigned to variables.",
+        choices:["Commas", "Curly Brackets", "Quotations", "Parenthesis"],
+        answer: 2,
     },
     {
-        title:"CHANGE FOR Q4",
-        choices:[ ],
-        answer: ""
+        title:"A very useful tool used during development and debugging for printing content to the debugger is:",
+        choices:["JavaScript", "Terminal/hash", "For Loops", "console.log"],
+        answer: 3,
     }
 ]
 
@@ -47,8 +53,9 @@ var timeLeft= questionsArray.length* 15;
 var setIntervalId=0;
 
 function startQuiz(){
+    
     introSectionEl.setAttribute("class","hide")
-    questionSectionEl.setAttribute("class",);
+    questionSectionEl.classList.remove("hide");
     // creates a dynamic hide 
     countDown();
     setIntervalId=setInterval(countDown,1000);
@@ -56,35 +63,85 @@ function startQuiz(){
 }
 
 function countDown(){
-    timerEl.textContent=timeLeft--;
-    if(timeLeft===0){
+    timerEl.textContent=timeLeft;
+    if(timeLeft>0)
+    {
+        timeLeft--;   
+    }
+    else
+    {
         clearInterval(setIntervalId)
     }
     // put text in
 }
 
 function showQuestions(){
-    titleEl.textContent=questionsArray[questionIndex],title;
+    if(questionIndex < questionsArray.length) {
+      titleEl.textContent = questionsArray[questionIndex].title;
+      var currentQuestionChoices = questionsArray[questionIndex].choices;
+      for(var i = 0; i< currentQuestionChoices.length; i++) {
+        choicesEl[i].textContent = currentQuestionChoices[i];
+      }
+    }  
+  
+  }
 
-    choicesEl[0].textContent=questionsArray[questionIndex].choices[0];
-
-    choicesEl[1].textContent=questionsArray[questionIndex].choices[1];
-
-    choicesEl[2].textContent=questionsArray[questionIndex].choices[2];
-
-    choicesEl[3].textContent=questionsArray[questionIndex].choices[3];
-
+function showFinalScore(){
+    questionSectionEl.setAttribute("class","hide")
+    initialSectionEl.classList.remove("hide");
+    
 }
+var saveBtn = document.getElementById("save-btn")
+saveBtn.addEventListener("click",function(){
+    initialSectionEl.setAttribute("class","hide");
+    showEnd();
+
+    
+    
+    
+})
+
+function showEnd(){
+    initialSectionEl.setAttribute("class","hide");
+    finalScoreEl.classList.remove("hide")
+    
+}
+
+
 
 function nextQuestion(event){
     var currentElement= event.target;
     if(currentElement.matches("button")){
-        questionIndex++;
-        showQuestions();
-    }
-
+        
+        if(questionIndex < questionsArray.length - 1)
+        {   
+            questionIndex++;
+            showQuestions();   
+        }
+        else{
+            questionIndex++;
+            showFinalScore();
+        }
+       }
 }
+
+function goBack(){
+    questionIndex = 0;
+    setIntervalId=setInterval(countDown,1000)
+    finalScoreEl.classList.add("hide");
+    introSectionEl.classList.remove("hide");
+    
+
+    
+}
+
+
+
+
+
 
 startBtn.addEventListener("click",startQuiz)
 
 questionSectionEl.addEventListener("click",nextQuestion)
+
+goBackBtn.addEventListener("click",goBack)

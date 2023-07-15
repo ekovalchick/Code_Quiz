@@ -21,11 +21,30 @@ header p{
     display: none;
 }
 
+.choices{
+    background-color: blueviolet;
+    color: white;
+    border-radius: 25px;
+    border-style: hidden;
+}
+
 #intro-section, #question-section, #initial-section, #highscore-section{
     text-align: center;
 }
 
 #question-section ul{
     list-style: none;
+}
+
+.choices.correct {
+    background-color: green;
+}
+
+.choices.incorrect{
+    background-color: red;
+}
+
+.choices.selected{
+    background-color: orange;
 }
 

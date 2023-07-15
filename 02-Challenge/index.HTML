@@ -19,7 +19,7 @@
             <button id="start-btn">Start Quiz</button>
         </section>
 
-        <section id="question-section">
+        <section id="question-section" class="hide">
             <h2 id="title">Commonly used data types DO NOT include:</h2>
             <ul>
                 <li><button class="choices">1. Strings </button></li>
@@ -29,7 +29,7 @@
             </ul>
         </section>
 
-        <section id="initial-section">
+        <section id="initial-section" class="hide">
             <h3>All Done</h3>
             <p>Your Final Score is <label for="" id="score">80</label></p>
 
@@ -37,10 +37,10 @@
             <button id="save-btn">save</button>
         </section>
 
-        <section id="highscore-section">
+        <section id="highscore-section" class="hide">
             <h3>High Scores</h3>
             <ol> 
-                <li>PL-80</li>
+                <input type="text" id="entered-value">
             </ol>
             <button id="go-back-bt">Go Back</button>
             <button id="clear-btn">Clear History</button>
@@ -50,6 +50,7 @@
     <footer>
 
     </footer>
+    
        <script src="./Assets/js/script.js"> </script> 
 </body>
 </html>
